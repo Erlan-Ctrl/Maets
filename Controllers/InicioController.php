@@ -111,4 +111,16 @@ class InicioController extends Controller
 
         return redirect()->route('inicio')->with('success', 'Jogo removido!');
     }
+
+    public function showCover($filename)
+    {
+        $path = storage_path('app/public/covers/' . $filename);
+
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        return response()->file($path);
+    }
+
 }
