@@ -3,13 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 
-Route::get('/storage/covers/{filename}', function ($filename) {
-    $path = storage_path('app/public/covers/' . $filename);
-    if (!file_exists($path)) {
-        abort(404);
-    }
-    return Response::file($path);
-})->where('filename', '.*');
+Route::get('/storage/covers/{filename}', [InicioController::class, 'showCover'])
+    ->where('filename', '.*');
 
 Route::get('/inicio', [InicioController::class, 'index'])->name('inicio');
 
